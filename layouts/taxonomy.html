@@ -1,0 +1,13 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{ if .Pages }}
+    <ul>
+      {{ range .Pages }}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>（{{ len .Pages }}）</li>
+      {{ end }}
+    </ul>
+  {{ else }}
+    <p>目前還沒有分類項目。</p>
+  {{ end }}
+{{ end }}

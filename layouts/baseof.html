@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }} | pollys blog</title>
+  <style>
+    body { margin: 0; background: #1e1e1e; color: #fff; font-family: sans-serif; line-height: 1.7; }
+    main { max-width: 760px; margin: 0 auto; padding: 64px 24px; }
+    a { color: #fff; text-underline-offset: 4px; }
+    a:hover { color: #ccc; }
+    a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+    li { margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="主導覽"><a href="{{ site.Home.RelPermalink }}">回首頁</a></nav>
+    {{ block "main" . }}{{ end }}
+  </main>
+</body>
+</html>
