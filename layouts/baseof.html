@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ .Title }} | pollys blog</title>
   <style>
-    body { margin: 0; background: #1e1e1e; color: #fff; font-family: sans-serif; line-height: 1.7; }
+    body { margin: 0; background: #1e1e1e; color: #fff; font-family: "Nunito", "Noto Sans TC", "Microsoft JhengHei", sans-serif; line-height: 1.7; }
     main { max-width: 760px; margin: 0 auto; padding: 64px 24px; }
     a { color: #fff; text-underline-offset: 4px; }
     a:hover { color: #ccc; }
     a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
     li { margin-bottom: 12px; }
-  </style>
+  /* 輕微增加閱讀文字的字距，保留小標籤原有樣式。 */
+body { letter-spacing:0.025em; }
+h1 { letter-spacing:0.015em; }
+button { letter-spacing:0.025em; }
+</style>
 </head>
 <body>
   <main>

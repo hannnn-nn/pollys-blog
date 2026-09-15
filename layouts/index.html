@@ -1,191 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>
-try { document.documentElement.dataset.theme = localStorage.getItem('polly-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }
-</script>
+{{ $script := resources.Get "js/theme-init.js" | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
 <title>Polly — 個人部落格</title>
-<style>
-:root { color-scheme: dark; --bg:#101010; --card:#191919; --panel:#121212; --line:#303030; --muted:#a3a3a3; }
-* { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:#f4f4f4; font-family:Inter,"Noto Sans TC","Microsoft JhengHei",sans-serif; line-height:1.7; }
-a { color:inherit; text-underline-offset:4px; }
-a:focus-visible { outline:2px solid white; outline-offset:5px; }
-.shell { width:min(100% - 40px,720px); margin:48px auto 32px; }
-.topline { display:flex; justify-content:space-between; margin:0 4px 18px; font-size:11px; letter-spacing:.18em; color:var(--muted); }
-.card { border:1px solid var(--line); border-radius:20px; overflow:hidden; background:var(--card); box-shadow:0 24px 80px #0005; }
-.banner { height:210px; position:relative; overflow:hidden; background:repeating-linear-gradient(135deg,transparent 0 44px,#ffffff06 44px 45px),linear-gradient(110deg,#353535,#181818); }
-.banner::after { content:"P."; position:absolute; right:30px; top:-60px; font-size:260px; line-height:1.3; font-weight:900; letter-spacing:-.1em; color:#ffffff07; }
-.banner-label { position:absolute; top:22px; left:28px; color:#c1c1c1; font-size:10px; letter-spacing:.25em; }
-.profile { padding:0 28px 28px; }
-.avatar { position:relative; display:grid; place-items:center; width:112px; height:112px; margin-top:-56px; border:7px solid var(--card); border-radius:50%; background:#e8e8e8; color:#202020; font-size:48px; font-weight:800; line-height:1; }
-.identity { padding:12px 0 23px; }
-h1 { margin:0; font-size:30px; letter-spacing:-.04em; line-height:1.3; }
-.handle { margin:3px 0 12px; color:var(--muted); font-size:13px; }
-.badge { display:inline-block; font-size:11px; border:1px solid #414141; border-radius:5px; padding:2px 8px; color:#ddd; }
-.details { background:var(--panel); border:1px solid #252525; border-radius:12px; padding:23px; }
-h2 { font-size:11px; letter-spacing:.13em; margin:0 0 11px; color:#bdbdbd; }
-.bio { margin:0; font-size:14px; }
-.divider { height:1px; background:var(--line); margin:24px 0; }
-.section-head { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.count { color:#818181; font-size:11px; }
-.empty { padding:22px 0 8px; }
-.empty-title { margin:0 0 5px; color:#ddd; font-size:15px; }
-.empty p:last-child { margin:0; color:var(--muted); font-size:13px; }
-.posts { padding:0; margin:6px 0 0; list-style:none; }
-.posts li+li { border-top:1px solid var(--line); }
-.posts a { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; text-decoration:none; }
-.posts a:hover .post-title { text-decoration:underline; }
-time { color:var(--muted); font-size:11px; white-space:nowrap; }
-footer { margin:18px 0; color:#757575; text-align:center; font-size:11px; letter-spacing:.06em; }
-@media(max-width:480px) { .shell { width:calc(100% - 24px); margin-top:22px; } .banner { height:160px; } .profile { padding:0 18px 18px; } .details { padding:18px; } .avatar { width:96px; height:96px; margin-top:-48px; font-size:40px; } .posts a { align-items:flex-start; flex-direction:column; gap:3px; } }
-button { font:inherit; cursor:pointer; }
-.tabs,.filters { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
-.tabs { padding-bottom:18px; border-bottom:1px solid var(--line); }
-.tabs button,.filters button { background:transparent; color:#aaa; border:1px solid #333; border-radius:7px; padding:8px 13px; font-size:13px; }
-button[aria-pressed="true"] { background:#eee; color:#111; border-color:#eee; }
-button:focus-visible { outline:2px solid white; outline-offset:3px; }
-.filters button { font-size:11px; padding:5px 10px; }
-[hidden] { display:none !important; }
-.timeline { list-style:none; margin:24px 0 0 6px; padding-left:23px; border-left:1px solid #444; }
-.timeline li { position:relative; padding-bottom:26px; }
-.timeline li::before { content:""; position:absolute; left:-28px; top:9px; width:9px; height:9px; border-radius:50%; background:#ddd; }
-.timeline a { display:block; text-decoration:none; }
-.timeline a:hover { text-decoration:underline; }
-.prose { font-size:14px; overflow-wrap:anywhere; }
-.prose h2 { font-size:17px; letter-spacing:0; margin-top:24px; }
-.prose img { max-width:100%; height:auto; }
-.theme-toggle { border:1px solid var(--line); border-radius:20px; padding:5px 12px; background:var(--card); color:inherit; font-size:11px; letter-spacing:.04em; }
-.topline { align-items:center; gap:12px; }
-html[data-theme="light"] { color-scheme:light; --bg:#f2f2f2; --card:#fff; --panel:#fafafa; --line:#d6d6d6; --muted:#666; }
-html[data-theme="light"] body { color:#202020; }
-html[data-theme="light"] .banner { background:repeating-linear-gradient(135deg,transparent 0 44px,#00000006 44px 45px),linear-gradient(110deg,#e2e2e2,#f7f7f7); }
-html[data-theme="light"] .banner::after { color:#00000008; }
-html[data-theme="light"] .banner-label,html[data-theme="light"] h2 { color:#555; }
-html[data-theme="light"] .avatar { background:#292929; color:#fff; }
-html[data-theme="light"] .badge { color:#444; border-color:#ccc; }
-html[data-theme="light"] .details { border-color:#e3e3e3; }
-html[data-theme="light"] .tabs button,html[data-theme="light"] .filters button { color:#555; border-color:#ccc; }
-html[data-theme="light"] button[aria-pressed="true"] { color:#fff; background:#222; border-color:#222; }
-html[data-theme="light"] .empty-title { color:#333; }
-html[data-theme="light"] .count,html[data-theme="light"] footer { color:#666; }
-html[data-theme="light"] .timeline { border-color:#bbb; }
-html[data-theme="light"] .timeline li::before { background:#444; }
-html[data-theme="light"] a:focus-visible,html[data-theme="light"] button:focus-visible { outline-color:#222; }
-/* 柔和灰白模式：分開背景、橫幅與內容卡片的層次。 */
-html[data-theme="light"] { --bg:#dedede; --card:#f5f5f5; --panel:#ebebeb; --line:#c5c5c5; --muted:#626262; }
-html[data-theme="light"] .card { border-color:#bcbcbc; box-shadow:0 8px 28px #0000000d; }
-html[data-theme="light"] .banner { background:repeating-linear-gradient(135deg,transparent 0 44px,#ffffff09 44px 45px),linear-gradient(110deg,#7a7a7a,#414141); border-bottom:1px solid #5a5a5a; }
-html[data-theme="light"] .banner::after { color:#ffffff0d; }
-html[data-theme="light"] .banner-label { color:#ededed; }
-html[data-theme="light"] .details { border-color:#cecece; }
-html[data-theme="light"] .tabs { border-bottom-color:#c8c8c8; }
-html[data-theme="light"] .tabs button,html[data-theme="light"] .filters button { background:#f5f5f5; border-color:#c2c2c2; color:#4d4d4d; }
-html[data-theme="light"] .tabs button:hover,html[data-theme="light"] .filters button:hover { background:#ddd; }
-html[data-theme="light"] button[aria-pressed="true"],html[data-theme="light"] button[aria-pressed="true"]:hover { background:#303030; border-color:#303030; color:#f5f5f5; }
-html[data-theme="light"] .theme-toggle { background:#ececec; border-color:#bcbcbc; color:#444; }
-html[data-theme="light"] .theme-toggle:hover { background:#f5f5f5; }
-html[data-theme="light"] .badge { background:#e7e7e7; border-color:#ccc; }
-.avatar {
-  object-fit: cover;
-  object-position: center;
-}
-
-html .banner,
-html[data-theme="light"] .banner {
-  background: url('{{ "images/banner.gif" | relURL }}') center / cover no-repeat;
-}
-
-/* 隱藏原本橫幅上的英文與裝飾 P */
-.banner-label,
-.banner::after {
-  display: none;
-}
-.profile-top { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; }
-.profile-top .avatar { flex-shrink:0; }
-.social-links { display:flex; flex-wrap:wrap; gap:8px; padding-top:12px; padding-bottom:5px; }
-.social-links a { display:grid; place-items:center; width:38px; height:38px; border:1px solid var(--line); border-radius:50%; color:var(--muted); text-decoration:none; background:var(--panel); }
-.social-links a:hover { color:inherit; border-color:currentColor; }
-.social-links svg { width:19px; height:19px; }
-.threads-symbol { font-family:Arial,sans-serif; font-size:23px; line-height:1; }
-@media(max-width:360px) { .profile-top { flex-wrap:wrap; } }
-.social-links { position:relative; }
-.social-links button { display:grid; place-items:center; width:38px; height:38px; border:1px solid var(--line); border-radius:50%; color:var(--muted); background:var(--panel); font-size:11px; font-weight:700; }
-.social-links button:hover { color:inherit; border-color:currentColor; }
-#discord-status { position:absolute; right:0; top:100%; z-index:2; font-size:11px; background:var(--card); color:inherit; border-radius:5px; max-width:240px; width:max-content; }
-#discord-status:not(:empty) { padding:4px 8px; border:1px solid var(--line); }
-.snow-layer { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:5; }
-.snowflake { position:absolute; top:-12px; left:var(--x); width:var(--size); height:var(--size); border-radius:50%; background:#fff; opacity:var(--alpha); animation:snowfall var(--duration) var(--delay) linear infinite; }
-html[data-theme="light"] .snowflake { background:#666; }
-@keyframes snowfall { from { transform:translate3d(0,-12px,0); } to { transform:translate3d(var(--drift),calc(100vh + 24px),0); } }
-.top-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; }
-@media(prefers-reduced-motion:reduce) { .snow-layer { display:none; } .snowflake { animation:none; } }
-.collection-intro { color:var(--muted); font-size:13px; margin:0 0 22px; }
-.collection-heading { font-size:15px; margin:26px 0 14px; }
-.life-log { list-style:none; padding:0; margin:20px 0; }
-.life-log li { display:grid; grid-template-columns:112px 1fr; gap:18px; }
-.log-date { font-size:11px; color:var(--muted); padding-top:8px; }
-.log-body { position:relative; border-left:1px solid var(--line); padding:0 0 28px 20px; }
-.log-body::before { content:''; position:absolute; width:7px; height:7px; border-radius:50%; background:var(--muted); left:-4px; top:10px; }
-.log-body h3,.library-copy h3,.pick-list h3 { font-size:15px; margin:9px 0 5px; overflow-wrap:anywhere; }
-.log-body p,.library-copy p,.pick-list p { font-size:13px; color:var(--muted); margin:5px 0 10px; }
-.log-body a,.library-copy a { font-size:12px; }
-.library-stats { display:flex; gap:28px; border-block:1px solid var(--line); padding:14px 0; color:var(--muted); font-size:12px; }
-.library-stats strong { font-size:24px; color:inherit; margin-right:6px; }
-.current-list { display:grid; gap:12px; font-size:13px; }
-.pick-list { border:1px solid var(--line); border-radius:10px; padding:16px; }
-.library-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-.library-item { border:1px solid var(--line); border-radius:10px; overflow:hidden; }
-.library-cover { width:100%; height:120px; object-fit:cover; display:block; }
-.cover-placeholder { display:grid; place-items:center; background:var(--card); color:var(--muted); font-size:20px; letter-spacing:.25em; }
-.library-copy { padding:14px; }
-.reference { font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:18px; margin-top:26px; }
-.interest-notes { margin-top:24px; font-size:13px; }
-.interest-notes summary { cursor:pointer; }
-@media(max-width:480px) { .life-log li { grid-template-columns:1fr; gap:8px; } .log-date { padding-left:20px; } .library-grid { grid-template-columns:1fr; } }
-.avatar-wrap { position:relative; width:112px; flex-shrink:0; margin-top:-56px; }
-.avatar-wrap .avatar { margin-top:0; }
-.presence-dot { position:absolute; right:5px; bottom:5px; width:23px; height:23px; border:5px solid var(--card); border-radius:50%; background:#777; }
-.presence-online { background:#43a56e; }
-.presence-idle { background:#dba83f; }
-.presence-busy { background:#d75b61; }
-.presence-busy::after { content:''; position:absolute; height:3px; width:9px; left:2px; top:5px; border-radius:2px; background:var(--card); }
-.presence-offline { background:var(--card); box-shadow:inset 0 0 0 3px #888; }
-.manual-status { display:flex; flex-wrap:wrap; align-items:center; gap:8px; color:var(--muted); font-size:12px; margin:2px 0 12px; overflow-wrap:anywhere; }
-.presence-label { border:1px solid var(--line); border-radius:12px; padding:1px 8px; font-size:10px; }
-@media(max-width:480px) { .avatar-wrap { width:96px; margin-top:-48px; } }
-.review-card-link { display:block; height:100%; color:inherit; text-decoration:none; } .review-card-link:hover { background:var(--card); } .review-prompt { display:block; margin-top:12px; font-size:12px; text-decoration:underline; }
-/* 桌面滿寬版面；手機保留原本的上下個人卡片。 */
-@media (min-width: 900px) {
-  .shell { width:100%; margin:0; }
-  .topline { margin:0; padding:16px 32px; background:var(--bg); }
-  .card, html[data-theme="light"] .card { border:0; border-radius:0; box-shadow:none; min-height:calc(100vh - 120px); }
-  .banner { width:100%; height:clamp(240px,28vw,380px); }
-  .profile { display:grid; grid-template-columns:280px minmax(0,1fr); grid-template-rows:auto 1fr; column-gap:40px; padding:0 40px 40px; align-items:start; }
-  .profile-top { grid-column:1; grid-row:1; display:flex; flex-direction:column; align-items:flex-start; gap:12px; min-width:0; }
-  .profile-top .avatar-wrap { width:128px; margin-top:-64px; }
-  .profile-top .avatar { width:128px; height:128px; }
-  .social-links { padding:0; }
-  .identity { grid-column:1; grid-row:2; padding-top:20px; overflow-wrap:anywhere; }
-  .details { grid-column:2; grid-row:1 / span 2; min-width:0; min-height:420px; margin-top:28px; padding:30px; }
-  .library-grid { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-  .library-cover { height:180px; }
-  .tabs { gap:12px; }
-  .tabs button { padding:9px 20px; }
-  footer { margin:0; padding:20px 32px; }
-}
-</style>
+{{ $css := resources.Get "css/profile.css" | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
 <body>
 <div id="snow-layer" class="snow-layer" aria-hidden="true" hidden></div>
 <main class="shell">
   <div class="topline"><span>POLLY'S BLOG</span><div class="top-actions"><button class="theme-toggle" type="button" id="snow-toggle" aria-pressed="false" aria-controls="snow-layer">❄ 飄雪：關</button><button class="theme-toggle" type="button" id="theme-toggle" aria-label="切換為淺色模式">☀ 淺色模式</button></div></div>
   <article class="card" aria-label="Polly 的個人檔案">
-    <div class="banner"><span class="banner-label">A LITTLE SPACE OF MY OWN.</span></div>
+    {{ partial "banner.html" . }}
     <div class="profile">
-      <!-- 將此 P 字母替換成 img，即可使用自己的頭像。 -->
       <div class="profile-top">
         {{ $status := hugo.Data.status }}
         {{ $labels := dict "online" "在線" "idle" "閒置" "busy" "忙碌" "offline" "離線" }}
@@ -195,15 +28,7 @@ html[data-theme="light"] .snowflake { background:#666; }
           <img class="avatar" src="{{ "images/avatar.jpg" | relURL }}" alt="Polly 的頭像">
           <span class="presence-dot presence-{{ $mode }}" role="img" aria-label="手動狀態：{{ index $labels $mode }}" title="{{ index $labels $mode }}（手動設定）"></span>
         </div>
-        <nav class="social-links" aria-label="社群連結">
-          <a href="https://www.instagram.com/p.hann_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram（另開分頁）" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <a href="https://www.threads.com/@p.hann_" target="_blank" rel="noopener noreferrer" aria-label="Threads（另開分頁）" title="Threads"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg></a>
-                  <button type="button" id="discord-copy" title="Discord：hannn_nn（點擊複製）" aria-label="複製 Discord 帳號 hannn_nn"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></button>
-          <span id="discord-status" role="status" aria-live="polite"></span>
-        <a href="https://github.com/hannnn-nn" target="_blank" rel="noopener noreferrer" aria-label="GitHub（另開分頁）" title="GitHub"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-</nav>
+        {{ partial "social-links.html" . }}
       </div>
       <header class="identity">
         <div class="manual-status"><span class="presence-label">{{ index $labels $mode }}</span>{{ with $status.message }}<span>{{ $status.emoji }} {{ . }}</span>{{ end }}</div>
@@ -246,126 +71,17 @@ html[data-theme="light"] .snowflake { background:#666; }
   </article>
   <footer>© {{ now.Year }} Polly </footer>
 </main>
-<script>
-(() => {
- const views = [...document.querySelectorAll('[data-view]')];
- const panels = [...document.querySelectorAll('[data-panel]')];
- const filters = [...document.querySelectorAll('[data-category]')];
- const posts = [...document.querySelectorAll('[data-post]')];
- function render() {
-   const state = new URLSearchParams(location.hash.slice(1));
-   const view = views.some(b => b.dataset.view === state.get('view')) ? state.get('view') : 'journal';
-   const category = filters.some(b => b.dataset.category === state.get('category')) ? state.get('category') : '全部';
-   views.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
-   panels.forEach(p => p.hidden = p.id !== view);
-   filters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.category === category)));
-   let count = 0;
-   posts.forEach(p => {
-     const categories = JSON.parse(p.dataset.categories || 'null') || [];
-     p.hidden = category !== '全部' && !categories.includes(category);
-     if (!p.hidden) count++;
-   });
-   document.getElementById('post-count').textContent = `${count} 篇文章`;
-   document.getElementById('empty-posts').hidden = count > 0;
- }
- function update(key, value) {
-   const state = new URLSearchParams(location.hash.slice(1));
-   state.set(key, value);
-   location.hash = state.toString();
- }
- views.forEach(b => b.addEventListener('click', () => update('view', b.dataset.view)));
- filters.forEach(b => b.addEventListener('click', () => update('category', b.dataset.category)));
- window.addEventListener('hashchange', render);
- render();
-})();
-</script>
-<script>
-(() => {
- const button = document.getElementById('theme-toggle');
- function syncThemeButton() {
-   const light = document.documentElement.dataset.theme === 'light';
-   button.textContent = light ? '☾ 深色模式' : '☀ 淺色模式';
-   button.setAttribute('aria-label', light ? '切換為深色模式' : '切換為淺色模式');
- }
- button.addEventListener('click', () => {
-   const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-   document.documentElement.dataset.theme = theme;
-   try { localStorage.setItem('polly-theme', theme); } catch (_) {}
-   syncThemeButton();
- });
- syncThemeButton();
-})();
-</script>
-<script>
-(() => {
- const button = document.getElementById('discord-copy');
- const status = document.getElementById('discord-status');
- let timer;
- button.addEventListener('click', async () => {
-   clearTimeout(timer);
-   try {
-     await navigator.clipboard.writeText('hannn_nn');
-     status.textContent = '已複製 hannn_nn';
-   } catch (_) {
-     status.textContent = '請手動複製：hannn_nn';
-   }
-   timer = setTimeout(() => { status.textContent = ''; }, 6000);
- });
-})();
-</script>
-<script>
-(() => {
- const layer = document.getElementById('snow-layer');
- const button = document.getElementById('snow-toggle');
- const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
- let enabled = true;
- try { enabled = localStorage.getItem('polly-snow') !== 'off'; } catch (_) {}
- for (let i = 0; i < 28; i++) {
-   const flake = document.createElement('span');
-   flake.className = 'snowflake';
-   flake.style.setProperty('--x', `${Math.random() * 100}%`);
-   flake.style.setProperty('--size', `${1.5 + Math.random() * 2.5}px`);
-   flake.style.setProperty('--alpha', `${0.16 + Math.random() * 0.24}`);
-   flake.style.setProperty('--duration', `${16 + Math.random() * 18}s`);
-   flake.style.setProperty('--delay', `${-Math.random() * 34}s`);
-   flake.style.setProperty('--drift', `${Math.random() * 90 - 45}px`);
-   layer.appendChild(flake);
- }
- function sync() {
-   const active = enabled && !motion.matches;
-   layer.hidden = !active;
-   button.setAttribute('aria-pressed', String(active));
-   button.textContent = active ? '❄ 飄雪：開' : '❄ 飄雪：關';
-   button.disabled = motion.matches;
-   button.title = motion.matches ? '依系統減少動態效果設定停用' : '切換飄雪效果';
-   layer.querySelectorAll('.snowflake').forEach(flake => {
-     flake.style.animationPlayState = active && !document.hidden ? 'running' : 'paused';
-   });
- }
- button.addEventListener('click', () => {
-   enabled = !enabled;
-   try { localStorage.setItem('polly-snow', enabled ? 'on' : 'off'); } catch (_) {}
-   sync();
- });
- motion.addEventListener('change', sync);
- document.addEventListener('visibilitychange', sync);
- sync();
-})();
-</script>
-<script>
-document.querySelectorAll('[data-collection]').forEach(collection => {
- const buttons = [...collection.querySelectorAll('[data-pick]')];
- const entries = [...collection.querySelectorAll('[data-entry]')];
- function filter(kind) {
-   let count = 0;
-   entries.forEach(entry => { entry.hidden = kind !== '全部' && entry.dataset.kind !== kind; if (!entry.hidden) count++; });
-   buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.pick === kind)));
-   collection.querySelector('[data-result-count]').textContent = `${count} 個項目`;
-   collection.querySelector('[data-no-results]').hidden = count > 0;
- }
- buttons.forEach(button => button.addEventListener('click', () => filter(button.dataset.pick)));
- filter('全部');
-});
-</script>
+{{ $script := resources.Get "js/navigation.js" | fingerprint }}
+<script defer src="{{ $script.RelPermalink }}"></script>
+{{ $script := resources.Get "js/theme-toggle.js" | fingerprint }}
+<script defer src="{{ $script.RelPermalink }}"></script>
+{{ $script := resources.Get "js/discord.js" | fingerprint }}
+<script defer src="{{ $script.RelPermalink }}"></script>
+{{ $script := resources.Get "js/snow.js" | fingerprint }}
+<script defer src="{{ $script.RelPermalink }}"></script>
+{{ $script := resources.Get "js/collections.js" | fingerprint }}
+<script defer src="{{ $script.RelPermalink }}"></script>
+{{ $script := resources.Get "js/carousel.js" | fingerprint }}
+<script defer src="{{ $script.RelPermalink }}"></script>
 </body>
 </html>

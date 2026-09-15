@@ -3,4 +3,4 @@
 # 改好按 Ctrl + S，預覽會更新。message 留空可隱藏近況。
 mode = 'online'
 emoji = '✍️'
-message = 'Writing mine blog'
+message = 'Writing my blog'
