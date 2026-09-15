@@ -1,0 +1,6 @@
+# 手動狀態，不會同步 Discord。
+# mode 可填 online（在線）、idle（閒置）、busy（忙碌）、offline（離線）。
+# 改好按 Ctrl + S，預覽會更新。message 留空可隱藏近況。
+mode = 'online'
+emoji = '✍️'
+message = 'Writing mine blog'

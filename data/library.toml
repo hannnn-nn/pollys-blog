@@ -1,0 +1,38 @@
+# url 留空（url = ''）就只顯示收藏，不需要寫心得或建立文章。
+# 新增收藏：複製一整段 [[items]]，分類可用 音樂、動漫、遊戲、電影。
+# image 可填 /images/你的圖片.jpg；url 填心得頁路徑，例如 /reviews/music-notes/。
+# score 留空表示不評分；featured = true 會出現在精選區。
+# status 可用 正在聽、正在看、正在玩、已完成、想看、想玩。
+# 填好後把 example 改為 false。
+[[items]]
+category = '音樂'
+title = '範例：歌手或樂團名稱'
+status = '正在聽'
+note = '寫一首推薦歌曲，或喜歡的原因。'
+score = ''
+image = ''
+url = '/reviews/music-notes/'
+featured = true
+example = true
+
+[[items]]
+category = '動漫'
+title = '範例：動畫或漫畫名稱'
+status = '正在看'
+note = '寫下進度、喜歡的角色或一句心得。'
+score = ''
+image = ''
+url = '/reviews/anime-notes/'
+featured = false
+example = true
+
+[[items]]
+category = '遊戲'
+title = '範例：遊戲名稱'
+status = '想玩'
+note = '寫下喜歡的玩法或想玩的原因。'
+score = ''
+image = ''
+url = '/reviews/game-notes/'
+featured = false
+example = true

@@ -1,0 +1,23 @@
+{{ $items := hugo.Data.library.items }}
+<h2 id="interests-title">興趣 / LIBRARY</h2>
+
+<p class="collection-intro">喜歡的音樂、看過的故事，和玩過的世界。</p>
+{{ $current := where $items "status" "in" (slice "正在聽" "正在看" "正在玩") }}
+{{ with $current }}<h3 class="collection-heading">最近在聽、看、玩</h3><div class="current-list">{{ range . }}<div><span class="badge">{{ .status }}</span> {{ if .url }}<a href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</div>{{ end }}</div>{{ end }}
+{{ $picks := where $items "featured" true }}
+{{ with $picks }}<h3 class="collection-heading">我的精選</h3><div class="pick-list">{{ range . }}<div><span class="count">{{ .category }}{{ if .example }} · 填寫範例{{ end }}</span><h3>{{ if .url }}<a href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h3><p>{{ .note }}</p></div>{{ end }}</div>{{ end }}
+<h3 class="collection-heading">全部收藏</h3>
+<div data-collection>
+  <div class="filters" role="group" aria-label="收藏分類"><button type="button" data-pick="全部" aria-pressed="true">全部</button>
+  {{ $categories := slice "音樂" "動漫" "遊戲" "電影" }}{{ range $items }}{{ $categories = $categories | append .category }}{{ end }}
+  {{ range $categories | uniq }}<button type="button" data-pick="{{ . }}" aria-pressed="false">{{ . }}</button>{{ end }}</div>
+  <p class="count" data-result-count aria-live="polite"></p>
+  <div class="library-grid">{{ range $items }}
+    <article class="library-item" data-entry data-kind="{{ .category }}">{{ if .url }}<a class="review-card-link" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ else }}<div class="review-card-static">{{ end }}
+      {{ with .image }}<img class="library-cover" src="{{ . | strings.TrimPrefix "/" | relURL }}" alt="" loading="lazy">{{ else }}<div class="library-cover cover-placeholder" aria-hidden="true">{{ .category }}</div>{{ end }}
+      <div class="library-copy"><span class="count">{{ .category }} · {{ .status }}{{ if .example }} · 填寫範例{{ end }}</span><h3>{{ .title }}</h3><p>{{ .note }}</p>
+      {{ with .score }}<span class="badge">{{ . }} / 10</span>{{ end }} {{ if .url }}<span class="review-prompt">閱讀我的想法 →</span>{{ end }}</div>
+    {{ if .url }}</a>{{ else }}</div>{{ end }}</article>{{ end }}</div>
+  <p data-no-results hidden>這個分類還沒有收藏。</p>
+</div>
+<p class="reference">呈現靈感：<a href="https://hawks.tw/library/" target="_blank" rel="noopener noreferrer">Hawks 的 Library</a></p>

@@ -1,0 +1,38 @@
+name: Deploy Hugo to GitHub Pages
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Install Hugo
+        run: |
+          curl -fsSL https://github.com/gohugoio/hugo/releases/download/v0.163.2/hugo_0.163.2_linux-amd64.tar.gz -o "$RUNNER_TEMP/hugo.tar.gz"
+          mkdir -p "$RUNNER_TEMP/hugo-bin"
+          tar -xzf "$RUNNER_TEMP/hugo.tar.gz" -C "$RUNNER_TEMP/hugo-bin"
+          echo "$RUNNER_TEMP/hugo-bin" >> "$GITHUB_PATH"
+      - name: Build
+        env:
+          TZ: Asia/Taipei
+        run: hugo --minify --baseURL https://hannnn-nn.github.io/pollys-blog/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

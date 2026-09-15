@@ -1,0 +1,18 @@
+# url 可填 Blog 文章路徑，例如 '/posts/my-first-post/'；留空就不顯示連結。
+# 複製一整段 [[entries]] 就能新增經歷；日期依 sort 新到舊排序。
+# 範例是填寫提示，不是你的實際經歷。填好後改 example = false。
+[[entries]]
+sort = '2026-09-15'
+date = '2026.09 — 至今'
+title = '範例：填入專案名稱'
+description = '寫下你做了什麼、負責的部分或成果。'
+url = ''
+example = true
+
+[[entries]]
+sort = '2026-09-01'
+date = '2026.09.01'
+title = '範例：填入活動或競賽名稱'
+description = '寫下參與身分、心得或獎項。'
+url = ''
+example = true

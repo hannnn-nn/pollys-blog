@@ -1,5 +1,6 @@
 {{ define "main" }}
 <article>
+{{ if eq .Section "reviews" }}<p><a href="{{ site.Home.RelPermalink }}#view=interests">← 回收藏清單</a></p>{{ end }}
   <h1>{{ .Title }}</h1>
   {{ if not .Date.IsZero }}<p><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></p>{{ end }}
   {{ .Content }}

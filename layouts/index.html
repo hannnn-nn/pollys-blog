@@ -95,7 +95,7 @@ html[data-theme="light"] .badge { background:#e7e7e7; border-color:#ccc; }
 
 html .banner,
 html[data-theme="light"] .banner {
-  background: url("/images/banner.gif") center / cover no-repeat;
+  background: url("{{ "images/banner.gif" | relURL }}") center / cover no-repeat;
 }
 
 /* 隱藏原本橫幅上的英文與裝飾 P */
@@ -122,6 +122,41 @@ html[data-theme="light"] .snowflake { background:#666; }
 @keyframes snowfall { from { transform:translate3d(0,-12px,0); } to { transform:translate3d(var(--drift),calc(100vh + 24px),0); } }
 .top-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; }
 @media(prefers-reduced-motion:reduce) { .snow-layer { display:none; } .snowflake { animation:none; } }
+.collection-intro { color:var(--muted); font-size:13px; margin:0 0 22px; }
+.collection-heading { font-size:15px; margin:26px 0 14px; }
+.life-log { list-style:none; padding:0; margin:20px 0; }
+.life-log li { display:grid; grid-template-columns:112px 1fr; gap:18px; }
+.log-date { font-size:11px; color:var(--muted); padding-top:8px; }
+.log-body { position:relative; border-left:1px solid var(--line); padding:0 0 28px 20px; }
+.log-body::before { content:''; position:absolute; width:7px; height:7px; border-radius:50%; background:var(--muted); left:-4px; top:10px; }
+.log-body h3,.library-copy h3,.pick-list h3 { font-size:15px; margin:9px 0 5px; overflow-wrap:anywhere; }
+.log-body p,.library-copy p,.pick-list p { font-size:13px; color:var(--muted); margin:5px 0 10px; }
+.log-body a,.library-copy a { font-size:12px; }
+.library-stats { display:flex; gap:28px; border-block:1px solid var(--line); padding:14px 0; color:var(--muted); font-size:12px; }
+.library-stats strong { font-size:24px; color:inherit; margin-right:6px; }
+.current-list { display:grid; gap:12px; font-size:13px; }
+.pick-list { border:1px solid var(--line); border-radius:10px; padding:16px; }
+.library-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.library-item { border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+.library-cover { width:100%; height:120px; object-fit:cover; display:block; }
+.cover-placeholder { display:grid; place-items:center; background:var(--card); color:var(--muted); font-size:20px; letter-spacing:.25em; }
+.library-copy { padding:14px; }
+.reference { font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:18px; margin-top:26px; }
+.interest-notes { margin-top:24px; font-size:13px; }
+.interest-notes summary { cursor:pointer; }
+@media(max-width:480px) { .life-log li { grid-template-columns:1fr; gap:8px; } .log-date { padding-left:20px; } .library-grid { grid-template-columns:1fr; } }
+.avatar-wrap { position:relative; width:112px; flex-shrink:0; margin-top:-56px; }
+.avatar-wrap .avatar { margin-top:0; }
+.presence-dot { position:absolute; right:5px; bottom:5px; width:23px; height:23px; border:5px solid var(--card); border-radius:50%; background:#777; }
+.presence-online { background:#43a56e; }
+.presence-idle { background:#dba83f; }
+.presence-busy { background:#d75b61; }
+.presence-busy::after { content:''; position:absolute; height:3px; width:9px; left:2px; top:5px; border-radius:2px; background:var(--card); }
+.presence-offline { background:var(--card); box-shadow:inset 0 0 0 3px #888; }
+.manual-status { display:flex; flex-wrap:wrap; align-items:center; gap:8px; color:var(--muted); font-size:12px; margin:2px 0 12px; overflow-wrap:anywhere; }
+.presence-label { border:1px solid var(--line); border-radius:12px; padding:1px 8px; font-size:10px; }
+@media(max-width:480px) { .avatar-wrap { width:96px; margin-top:-48px; } }
+.review-card-link { display:block; height:100%; color:inherit; text-decoration:none; } .review-card-link:hover { background:var(--card); } .review-prompt { display:block; margin-top:12px; font-size:12px; text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -133,7 +168,14 @@ html[data-theme="light"] .snowflake { background:#666; }
     <div class="profile">
       <!-- 將此 P 字母替換成 img，即可使用自己的頭像。 -->
       <div class="profile-top">
-        <img class="avatar" src="/images/avatar.jpg" alt="Polly 的頭像">
+        {{ $status := hugo.Data.status }}
+        {{ $labels := dict "online" "在線" "idle" "閒置" "busy" "忙碌" "offline" "離線" }}
+        {{ $mode := $status.mode | default "offline" }}
+        {{ if not (isset $labels $mode) }}{{ $mode = "offline" }}{{ end }}
+        <div class="avatar-wrap">
+          <img class="avatar" src="{{ "images/avatar.jpg" | relURL }}" alt="Polly 的頭像">
+          <span class="presence-dot presence-{{ $mode }}" role="img" aria-label="手動狀態：{{ index $labels $mode }}" title="{{ index $labels $mode }}（手動設定）"></span>
+        </div>
         <nav class="social-links" aria-label="社群連結">
           <a href="https://www.instagram.com/p.hann_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram（另開分頁）" title="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -145,6 +187,7 @@ html[data-theme="light"] .snowflake { background:#666; }
 </nav>
       </div>
       <header class="identity">
+        <div class="manual-status"><span class="presence-label">{{ index $labels $mode }}</span>{{ with $status.message }}<span>{{ $status.emoji }} {{ . }}</span>{{ end }}</div>
         <h1>Polly</h1>
         <p class="handle">你好，歡迎來到我的blog，我是一個什麼都碰一點的怪人:D</p>
         <span class="badge">大安高工</span>
@@ -173,16 +216,8 @@ html[data-theme="light"] .snowflake { background:#666; }
           </ul>
           <div id="empty-posts" class="empty" {{ if $posts }}hidden{{ end }}><p class="empty-title">故事，從這裡開始。</p><p>這個分類目前還沒有文章。</p></div>
         </section>
-        <section id="timeline" data-panel hidden aria-labelledby="timeline-title">
-          <h2 id="timeline-title">時間軸 / TIMELINE</h2>
-          {{ if $posts }}
-          <ol class="timeline">{{ range $posts.ByDate.Reverse }}<li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="count">{{ delimit .Params.categories " · " }}</span></li>{{ end }}</ol>
-          {{ else }}<div class="empty"><p class="empty-title">每一步，都值得留下。</p><p>發布文章後，足跡會依日期出現在這裡。</p></div>{{ end }}
-        </section>
-        <section id="interests" data-panel hidden aria-labelledby="interests-title">
-          <h2 id="interests-title">興趣 / INTERESTS</h2>
-          <div class="prose">{{ with site.GetPage "/interests" }}{{ .Content }}{{ end }}</div>
-        </section>
+        <section id="timeline" data-panel hidden aria-labelledby="timeline-title">{{ partial "profile-timeline.html" . }}</section>
+        <section id="interests" data-panel hidden aria-label="收藏清單">{{ partial "profile-library.html" . }}</section>
         <section id="about" data-panel hidden aria-labelledby="about-title">
           <h2 id="about-title">關於我 / ABOUT ME</h2>
           <div class="prose">{{ with site.GetPage "/about" }}{{ .Content }}{{ end }}</div>
@@ -297,6 +332,21 @@ html[data-theme="light"] .snowflake { background:#666; }
  document.addEventListener('visibilitychange', sync);
  sync();
 })();
+</script>
+<script>
+document.querySelectorAll('[data-collection]').forEach(collection => {
+ const buttons = [...collection.querySelectorAll('[data-pick]')];
+ const entries = [...collection.querySelectorAll('[data-entry]')];
+ function filter(kind) {
+   let count = 0;
+   entries.forEach(entry => { entry.hidden = kind !== '全部' && entry.dataset.kind !== kind; if (!entry.hidden) count++; });
+   buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.pick === kind)));
+   collection.querySelector('[data-result-count]').textContent = `${count} 個項目`;
+   collection.querySelector('[data-no-results]').hidden = count > 0;
+ }
+ buttons.forEach(button => button.addEventListener('click', () => filter(button.dataset.pick)));
+ filter('全部');
+});
 </script>
 </body>
 </html>
