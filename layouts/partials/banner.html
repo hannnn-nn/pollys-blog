@@ -5,5 +5,5 @@
   {{ $src = printf "%s?v=%s" $src (os.ReadFile $file | crypto.SHA256) }}
 {{ end }}
 <div class="banner">
-  <img class="banner-image" src="{{ $src }}" alt="{{ hugo.Data.banner.alt }}">
+  <img class="banner-image" src="{{ $src }}" alt="{{ hugo.Data.banner.alt }}" />
 </div>

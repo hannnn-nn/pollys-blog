@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ .Title }} | Polly</title>
-  {{ with resources.Get "js/theme-init.js" | fingerprint }}<script src="{{ .RelPermalink }}"></script>{{ end }}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  {{ with resources.Get "css/article.css" | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}">{{ end }}
-</head>
-<body>
-  <main{{ if .IsPage }} class="reader-shell"{{ end }}>
-    <nav class="page-nav" aria-label="主導覽"><a href="{{ site.Home.RelPermalink }}#view=journal">← 回首頁</a><button id="theme-toggle" type="button">切換主題</button></nav>
-    {{ if .IsPage }}
-    <div class="reader-layout">
-      <aside class="reader-profile" aria-label="Polly 的個人資料">
-        {{ partial "profile-identity.html" . }}
-        <nav class="reader-links" aria-label="個人頁面">
-          <a href="{{ site.Home.RelPermalink }}#view=journal">文章</a>
-          <a href="{{ site.Home.RelPermalink }}#view=interests">興趣</a>
-          <a href="{{ site.Home.RelPermalink }}#view=timeline">時間軸</a>
-          <a href="{{ site.Home.RelPermalink }}#view=about">關於我</a>
-        </nav>
-      </aside>
-      <div class="reader-content">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | Polly</title>
+    {{ with resources.Get "js/theme-init.js" | fingerprint }}
+      <script src="{{ .RelPermalink }}"></script>
     {{ end }}
-    {{ block "main" . }}{{ end }}
-    {{ if .IsPage }}</div></div>{{ end }}
-    <footer>Polly</footer>
-  </main>
-  {{ with resources.Get "js/theme-toggle.js" | fingerprint }}<script src="{{ .RelPermalink }}" defer></script>{{ end }}
-{{ if .IsPage }}{{ with resources.Get "js/discord.js" | fingerprint }}<script src="{{ .RelPermalink }}" defer></script>{{ end }}{{ end }}
-</body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    {{ with resources.Get "css/article.css" | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{ end }}
+  </head>
+  <body>
+    <main{{ if .IsPage }} class="reader-shell"{{ end }}>
+      <nav class="page-nav" aria-label="主導覽">
+        <a href="{{ site.Home.RelPermalink }}#view=journal">← 回首頁</a>
+        <button id="theme-toggle" type="button">切換主題</button>
+      </nav>
+      {{ if .IsPage }}
+        <div class="reader-layout">
+          <aside class="reader-profile" aria-label="Polly 的個人資料">
+            {{ partial "profile-identity.html" . }}
+            <nav class="reader-links" aria-label="個人頁面">
+              <a href="{{ site.Home.RelPermalink }}#view=journal">文章</a>
+              <a href="{{ site.Home.RelPermalink }}#view=interests">興趣</a>
+              <a href="{{ site.Home.RelPermalink }}#view=timeline">時間軸</a>
+              <a href="{{ site.Home.RelPermalink }}#view=about">關於我</a>
+            </nav>
+          </aside>
+          <div class="reader-content">
+      {{ end }}
+
+      {{ block "main" . }}{{ end }}
+
+      {{ if .IsPage }}
+          </div>
+        </div>
+      {{ end }}
+      <footer>Polly</footer>
+    </main>
+    {{ with resources.Get "js/theme-toggle.js" | fingerprint }}
+      <script src="{{ .RelPermalink }}" defer></script>
+    {{ end }}
+    {{ if .IsPage }}
+      {{ with resources.Get "js/discord.js" | fingerprint }}
+        <script src="{{ .RelPermalink }}" defer></script>
+      {{ end }}
+    {{ end }}
+  </body>
 </html>
+

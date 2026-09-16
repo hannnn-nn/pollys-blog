@@ -1,74 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-TW">
-<head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{{ $script := resources.Get "js/theme-init.js" | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
-<title>Polly — 個人部落格</title>
-{{ $css := resources.Get "css/profile.css" | fingerprint }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}">
-</head>
-<body>
-<div id="snow-layer" class="snow-layer" aria-hidden="true" hidden></div>
-<main class="shell">
-  <div class="topline"><span>POLLY'S BLOG</span><div class="top-actions"><button class="theme-toggle" type="button" id="snow-toggle" aria-pressed="false" aria-controls="snow-layer">❄ 飄雪：關</button><button class="theme-toggle" type="button" id="theme-toggle" aria-label="切換為淺色模式">☀ 淺色模式</button></div></div>
-  <article class="card" aria-label="Polly 的個人檔案">
-    {{ partial "banner.html" . }}
-    <div class="profile">
-      {{ partial "profile-identity.html" . }}
-      <div class="details">
-        {{ $posts := where site.RegularPages "Section" "posts" }}
-        <nav class="tabs" aria-label="個人檔案分頁">
-          <button type="button" data-view="journal" aria-pressed="true" aria-controls="journal">文章</button>
-          <button type="button" data-view="timeline" aria-pressed="false" aria-controls="timeline">時間軸</button>
-          <button type="button" data-view="interests" aria-pressed="false" aria-controls="interests">興趣</button>
-          <button type="button" data-view="about" aria-pressed="false" aria-controls="about">關於我</button>
-        </nav>
-        <section id="journal" data-panel aria-labelledby="posts-title">
-          <div class="section-head"><h2 id="posts-title">文章 / JOURNAL</h2><span id="post-count" class="count" aria-live="polite">{{ len $posts }} 篇文章</span></div>
-          <div class="filters" role="group" aria-label="文章分類">
-            {{ range slice "全部" "碎碎念" "活動與競賽" "專案" "理論討論" }}
-            <button type="button" data-category="{{ . }}" aria-pressed="{{ if eq . "全部" }}true{{ else }}false{{ end }}">{{ . }}</button>
-            {{ end }}
-          </div>
-          <ul class="posts">
-            {{ range $posts.ByDate.Reverse }}
-            <li data-post data-categories="{{ .Params.categories | jsonify }}">
-              <a href="{{ .RelPermalink }}">
-                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
-                <h3 class="post-title">{{ .Title }}</h3>
-                <p class="post-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 90 }}</p>
-                <span class="post-read">閱讀文章 ↗</span>
-              </a>
-            </li>
-            {{ end }}
-          </ul>
-          <div id="empty-posts" class="empty" {{ if $posts }}hidden{{ end }}><p class="empty-title">故事，從這裡開始。</p><p>這個分類目前還沒有文章。</p></div>
-        </section>
-        <section id="timeline" data-panel hidden aria-labelledby="timeline-title">{{ partial "profile-timeline.html" . }}</section>
-        <section id="interests" data-panel hidden aria-label="收藏清單">{{ partial "profile-library.html" . }}</section>
-        <section id="about" data-panel hidden aria-labelledby="about-title">
-          <h2 id="about-title">關於我 / ABOUT ME</h2>
-          <div class="prose">{{ with site.GetPage "/about" }}{{ .Content }}{{ end }}</div>
-        </section>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{ $script := resources.Get "js/theme-init.js" | fingerprint }}
+    <script src="{{ $script.RelPermalink }}"></script>
+    <title>Polly — 個人部落格</title>
+    {{ $css := resources.Get "css/profile.css" | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+  </head>
+  <body>
+    <div id="snow-layer" class="snow-layer" aria-hidden="true" hidden></div>
+    <main class="shell">
+      <div class="topline">
+        <span>POLLY'S BLOG</span>
+        <div class="top-actions">
+          <button
+            class="theme-toggle"
+            type="button"
+            id="snow-toggle"
+            aria-pressed="false"
+            aria-controls="snow-layer"
+          >
+            ❄ 飄雪：關</button
+          ><button class="theme-toggle" type="button" id="theme-toggle" aria-label="切換為淺色模式">
+            ☀ 淺色模式
+          </button>
+        </div>
       </div>
-    </div>
-  </article>
-  <footer>© {{ now.Year }} Polly </footer>
-</main>
-{{ $script := resources.Get "js/navigation.js" | fingerprint }}
-<script defer src="{{ $script.RelPermalink }}"></script>
-{{ $script := resources.Get "js/theme-toggle.js" | fingerprint }}
-<script defer src="{{ $script.RelPermalink }}"></script>
-{{ $script := resources.Get "js/discord.js" | fingerprint }}
-<script defer src="{{ $script.RelPermalink }}"></script>
-{{ $script := resources.Get "js/snow.js" | fingerprint }}
-<script defer src="{{ $script.RelPermalink }}"></script>
-{{ $script := resources.Get "js/collections.js" | fingerprint }}
-<script defer src="{{ $script.RelPermalink }}"></script>
-</body>
+      <article class="card" aria-label="Polly 的個人檔案">
+        {{ partial "banner.html" . }}
+        <div class="profile">
+          {{ partial "profile-identity.html" . }}
+          <div class="details">
+            {{ $posts := where site.RegularPages "Section" "posts" }}
+            <nav class="tabs" aria-label="個人檔案分頁">
+              <button type="button" data-view="journal" aria-pressed="true" aria-controls="journal">
+                文章
+              </button>
+              <button
+                type="button"
+                data-view="timeline"
+                aria-pressed="false"
+                aria-controls="timeline"
+              >
+                時間軸
+              </button>
+              <button
+                type="button"
+                data-view="interests"
+                aria-pressed="false"
+                aria-controls="interests"
+              >
+                興趣
+              </button>
+              <button type="button" data-view="about" aria-pressed="false" aria-controls="about">
+                關於我
+              </button>
+            </nav>
+            <section id="journal" data-panel aria-labelledby="posts-title">
+              <div class="section-head">
+                <h2 id="posts-title">文章 / JOURNAL</h2>
+                <span id="post-count" class="count" aria-live="polite"
+                  >{{ len $posts }} 篇文章</span
+                >
+              </div>
+              <div class="filters" role="group" aria-label="文章分類">
+                {{ range slice "全部" "碎碎念" "活動與競賽" "專案" "理論討論" }}
+                  <button
+                    type="button"
+                    data-category="{{ . }}"
+                    aria-pressed="{{ if eq . "全部" }}
+                      true
+                    {{ else }}
+                      false
+                    {{ end }}"
+                  >
+                    {{ . }}
+                  </button>
+                {{ end }}
+              </div>
+              <ul class="posts">
+                {{ range $posts.ByDate.Reverse }}
+                  <li data-post data-categories="{{ .Params.categories | jsonify }}">
+                    <a href="{{ .RelPermalink }}">
+                      <time datetime="{{ .Date.Format "2006-01-02" }}"
+                        >{{ .Date.Format "2006.01.02" }}</time
+                      >
+                      <h3 class="post-title">{{ .Title }}</h3>
+                      <p class="post-excerpt">
+                        {{ .Summary | plainify | htmlUnescape | truncate 90 }}
+                      </p>
+                      <span class="post-read">閱讀文章 ↗</span>
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+              <div id="empty-posts" class="empty" {{ if $posts }}hidden{{ end }}>
+                <p class="empty-title">故事，從這裡開始。</p>
+                <p>這個分類目前還沒有文章。</p>
+              </div>
+            </section>
+            <section id="timeline" data-panel hidden aria-labelledby="timeline-title">
+              {{ partial "profile-timeline.html" . }}
+            </section>
+            <section id="interests" data-panel hidden aria-label="收藏清單">
+              {{ partial "profile-library.html" . }}
+            </section>
+            <section id="about" data-panel hidden aria-labelledby="about-title">
+              <h2 id="about-title">關於我 / ABOUT ME</h2>
+              <div class="prose">{{ with site.GetPage "/about" }}{{ .Content }}{{ end }}</div>
+            </section>
+          </div>
+        </div>
+      </article>
+      <footer>© {{ now.Year }} Polly
+         <br>
+        Inspired by
+        <a href="https://hawks.tw/" target="_blank" rel="noopener noreferrer">Hawks</a> and many other blogs
+      </footer>
+    </main>
+    {{ $script := resources.Get "js/navigation.js" | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}"></script>
+    {{ $script := resources.Get "js/theme-toggle.js" | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}"></script>
+    {{ $script := resources.Get "js/discord.js" | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}"></script>
+    {{ $script := resources.Get "js/snow.js" | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}"></script>
+    {{ $script := resources.Get "js/collections.js" | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}"></script>
+  </body>
 </html>

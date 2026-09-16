@@ -1,18 +1,28 @@
 {{ $entries := sort hugo.Data.timeline.entries "sort" "desc" }}
 <h2 id="timeline-title">時間軸 / TIMELINE</h2>
-<p class="collection-intro">參與過的活動、做過的專案，還有一路學到的事。</p>
+<p class="collection-intro">參與過的活動、比賽、專案還有一路學到的事。</p>
 {{ if $entries }}
-<ol class="life-log">
-  {{ range $entries }}
-  <li>
-    <div class="log-date">{{ .date }}</div>
-    <div class="log-body">
-      {{ if .example }}<span class="count">填寫範例</span>{{ end }}
-      <h3>{{ if .url }}<a href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h3>
-      <p>{{ .description }}</p>
-      {{ with .url }}<a href="{{ . | strings.TrimPrefix "/" | relURL }}">閱讀相關文章 →</a>{{ end }}
-    </div>
-  </li>
-  {{ end }}
-</ol>
-{{ else }}<p>目前還沒有紀錄。</p>{{ end }}
+  <ol class="life-log">
+    {{ range $entries }}
+      <li>
+        <div class="log-date">{{ .date }}</div>
+        <div class="log-body">
+          {{ if .example }}<span class="count">填寫範例</span>{{ end }}
+          <h3>
+            {{ if .url }}
+              <a href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .title }}</a>
+            {{ else }}
+              {{ .title }}
+            {{ end }}
+          </h3>
+          <p>{{ .description }}</p>
+          {{ with .url }}
+            <a href="{{ . | strings.TrimPrefix "/" | relURL }}">閱讀相關文章 →</a>
+          {{ end }}
+        </div>
+      </li>
+    {{ end }}
+  </ol>
+{{ else }}
+  <p>目前還沒有紀錄。</p>
+{{ end }}

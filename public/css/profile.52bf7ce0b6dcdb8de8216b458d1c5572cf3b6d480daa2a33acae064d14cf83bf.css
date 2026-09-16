@@ -644,10 +644,8 @@ html[data-theme="light"] .snowflake {
 
 .library-cover {
   width: 100%;
-  height: auto;
-  aspect-ratio: 500 / 332;
-  object-fit: contain;
-  background: var(--card);
+  height: 120px;
+  object-fit: cover;
   display: block;
 }
 
@@ -858,6 +856,9 @@ html[data-theme="light"] .snowflake {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
+  .library-cover {
+    height: 180px;
+  }
 
   .tabs {
     gap: 12px;

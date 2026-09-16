@@ -6,14 +6,14 @@
 # 填好後把 example 改為 false。
 [[items]]
 category = '音樂'
-title = '範例：歌手或樂團名稱'
+title = 'ヨルシカ'
 status = '正在聽'
-note = '寫一首推薦歌曲，或喜歡的原因。'
-score = ''
-image = ''
+note = '這段時間很喜歡聽ルバート，曲風很歡樂每天楽しい！'
+score = '10'
+image = 'images/Yorushika_Logo.jpg'
 url = ''
 featured = true
-example = true
+example = false
 
 [[items]]
 category = '動漫'
@@ -29,7 +29,7 @@ example = true
 [[items]]
 category = '遊戲'
 title = '範例：遊戲名稱'
-status = '想玩'
+status = '正在玩'
 note = '寫下喜歡的玩法或想玩的原因。'
 score = ''
 image = ''
