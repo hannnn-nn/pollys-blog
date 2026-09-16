@@ -1,9 +1,3 @@
-# 每張照片一段 [[slides]]，圖片先放進 static/images。
-interval = 6
-[[slides]]
-image = 'images/banner.gif'
+# 單張橫幅圖片，檔案放在 static/images。
+image = 'images/banner.JPEG'
 alt = 'Polly 的橫幅'
-# 新增照片時移除下面四行的 #，並改成實際檔名。
-# [[slides]]
-# image = 'images/banner-2.jpg'
-# alt = '第二張照片'

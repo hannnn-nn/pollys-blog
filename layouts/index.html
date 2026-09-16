@@ -19,25 +19,7 @@
   <article class="card" aria-label="Polly 的個人檔案">
     {{ partial "banner.html" . }}
     <div class="profile">
-      <div class="profile-top">
-        {{ $status := hugo.Data.status }}
-        {{ $labels := dict "online" "在線" "idle" "閒置" "busy" "忙碌" "offline" "離線" }}
-        {{ $mode := $status.mode | default "offline" }}
-        {{ if not (isset $labels $mode) }}{{ $mode = "offline" }}{{ end }}
-        <div class="avatar-wrap">
-          <img class="avatar" src="{{ "images/avatar.jpg" | relURL }}" alt="Polly 的頭像">
-          <span class="presence-dot presence-{{ $mode }}" role="img" aria-label="手動狀態：{{ index $labels $mode }}" title="{{ index $labels $mode }}（手動設定）"></span>
-        </div>
-        {{ partial "social-links.html" . }}
-      </div>
-      <header class="identity">
-        <div class="manual-status"><span class="presence-label">{{ index $labels $mode }}</span>{{ with $status.message }}<span>{{ $status.emoji }} {{ . }}</span>{{ end }}</div>
-        <h1>Polly</h1>
-        <p class="handle">你好，歡迎來到我的blog，我是一個什麼都碰一點的怪人:D</p>
-        <span class="badge">大安高工</span>
-        <span class="badge">雙北</span>
-        <span class="badge">2009-04-30</span>
-      </header>
+      {{ partial "profile-identity.html" . }}
       <div class="details">
         {{ $posts := where site.RegularPages "Section" "posts" }}
         <nav class="tabs" aria-label="個人檔案分頁">
@@ -55,7 +37,14 @@
           </div>
           <ul class="posts">
             {{ range $posts.ByDate.Reverse }}
-            <li data-post data-categories="{{ .Params.categories | jsonify }}"><a href="{{ .RelPermalink }}"><span class="post-title">{{ .Title }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></a></li>
+            <li data-post data-categories="{{ .Params.categories | jsonify }}">
+              <a href="{{ .RelPermalink }}">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
+                <h3 class="post-title">{{ .Title }}</h3>
+                <p class="post-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 90 }}</p>
+                <span class="post-read">閱讀文章 ↗</span>
+              </a>
+            </li>
             {{ end }}
           </ul>
           <div id="empty-posts" class="empty" {{ if $posts }}hidden{{ end }}><p class="empty-title">故事，從這裡開始。</p><p>這個分類目前還沒有文章。</p></div>
@@ -80,8 +69,6 @@
 {{ $script := resources.Get "js/snow.js" | fingerprint }}
 <script defer src="{{ $script.RelPermalink }}"></script>
 {{ $script := resources.Get "js/collections.js" | fingerprint }}
-<script defer src="{{ $script.RelPermalink }}"></script>
-{{ $script := resources.Get "js/carousel.js" | fingerprint }}
 <script defer src="{{ $script.RelPermalink }}"></script>
 </body>
 </html>

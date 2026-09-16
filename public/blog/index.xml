@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Blogs on My New Hugo Project</title>
+		<link>http://127.0.0.1:1313/blog/</link>
+		<description>Recent content in Blogs on My New Hugo Project</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="http://127.0.0.1:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title></title>
+				<link>http://127.0.0.1:1313/blog/%E6%AD%A1%E8%BF%8E/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://127.0.0.1:1313/blog/%E6%AD%A1%E8%BF%8E/</guid>
+				<description>&lt;p&gt;這是你的新儲存庫 &lt;em&gt;vault&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;對筆記輸入一些內容、[[建立鏈接]]或試試匯入 &lt;a href=&#34;https://help.obsidian.md/Plugins/Importer&#34;&gt;匯入外掛&lt;/a&gt;!&lt;/p&gt;&#xA;&lt;p&gt;當一切就緒時，刪除此筆記並繼續使用此儲存庫。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

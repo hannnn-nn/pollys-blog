@@ -11,7 +11,7 @@ status = '正在聽'
 note = '寫一首推薦歌曲，或喜歡的原因。'
 score = ''
 image = ''
-url = '/reviews/music-notes/'
+url = ''
 featured = true
 example = true
 
@@ -22,7 +22,7 @@ status = '正在看'
 note = '寫下進度、喜歡的角色或一句心得。'
 score = ''
 image = ''
-url = '/reviews/anime-notes/'
+url = ''
 featured = false
 example = true
 
@@ -33,6 +33,6 @@ status = '想玩'
 note = '寫下喜歡的玩法或想玩的原因。'
 score = ''
 image = ''
-url = '/reviews/game-notes/'
+url = ''
 featured = false
 example = true

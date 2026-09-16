@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on My New Hugo Project</title>
+		<link>http://127.0.0.1:1313/posts/</link>
+		<description>Recent content in Posts on My New Hugo Project</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 16 Sep 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://127.0.0.1:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>我的Blog</title>
+				<link>http://127.0.0.1:1313/posts/%E6%88%91%E7%9A%84blog/</link>
+				<pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate>
+				<guid>http://127.0.0.1:1313/posts/%E6%88%91%E7%9A%84blog/</guid>
+				<description>&lt;p&gt;2026/9/15&lt;/p&gt;&#xA;&lt;p&gt;我vibe出了我自己的blog，我蠻驚訝我竟然會做Blog，我之前還信誓旦旦說不會，我錯了XD&lt;/p&gt;&#xA;&lt;p&gt;反正以後我會在上面多發自己的事情，有興趣的朋友就常上來看吧！&lt;/p&gt;&#xA;&lt;p&gt;先來稍微簡單介紹一下自己&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

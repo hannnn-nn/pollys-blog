@@ -1,6 +1,9 @@
-<div class="banner" id="banner-carousel" role="region" aria-label="橫幅照片輪播" data-interval="{{ hugo.Data.banner.interval | default 6 }}">
-{{ range $index, $slide := hugo.Data.banner.slides }}
-<img class="banner-slide" src="{{ $slide.image | strings.TrimPrefix "/" | relURL }}" alt="{{ $slide.alt }}" {{ if $index }}hidden{{ end }}>
+{{ $path := hugo.Data.banner.image | strings.TrimPrefix "/" }}
+{{ $src := $path | relURL }}
+{{ $file := printf "static/%s" $path }}
+{{ if os.FileExists $file }}
+  {{ $src = printf "%s?v=%s" $src (os.ReadFile $file | crypto.SHA256) }}
 {{ end }}
-<div class="banner-controls" hidden><button type="button" data-prev aria-label="上一張照片">‹</button><span data-slide-count></span><button type="button" data-next aria-label="下一張照片">›</button><button type="button" data-pause>暫停</button></div>
+<div class="banner">
+  <img class="banner-image" src="{{ $src }}" alt="{{ hugo.Data.banner.alt }}">
 </div>

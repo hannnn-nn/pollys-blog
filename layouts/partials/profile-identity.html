@@ -1,0 +1,19 @@
+      <div class="profile-top">
+        {{ $status := hugo.Data.status }}
+        {{ $labels := dict "online" "在線" "idle" "閒置" "busy" "忙碌" "offline" "離線" }}
+        {{ $mode := $status.mode | default "offline" }}
+        {{ if not (isset $labels $mode) }}{{ $mode = "offline" }}{{ end }}
+        <div class="avatar-wrap">
+          <img class="avatar" src="{{ "images/avatar.JPEG" | relURL }}" alt="Polly 的頭像">
+          <span class="presence-dot presence-{{ $mode }}" role="img" aria-label="手動狀態：{{ index $labels $mode }}" title="{{ index $labels $mode }}（手動設定）"></span>
+        </div>
+        {{ partial "social-links.html" . }}
+      </div>
+      <header class="identity">
+        <div class="manual-status"><span class="presence-label">{{ index $labels $mode }}</span>{{ with $status.message }}<span>{{ $status.emoji }} {{ . }}</span>{{ end }}</div>
+        <h1>Polly</h1>
+        <p class="handle">你好，歡迎來到我的blog，我是一個什麼都碰一點的怪人:D</p>
+        <span class="badge">大安高工</span>
+        <span class="badge">雙北</span>
+        <span class="badge">2009-04-30</span>
+      </header>

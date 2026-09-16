@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>My New Hugo Project</title>
-		<link>http://localhost:1313/</link>
+		<link>http://127.0.0.1:1313/</link>
 		<description>Recent content on My New Hugo Project</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -10,6 +10,36 @@
 		
 		
 		
-			<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+			<lastBuildDate>Wed, 16 Sep 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://127.0.0.1:1313/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>我的Blog</title>
+				<link>http://127.0.0.1:1313/posts/%E6%88%91%E7%9A%84blog/</link>
+				<pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate>
+				<guid>http://127.0.0.1:1313/posts/%E6%88%91%E7%9A%84blog/</guid>
+				<description>&lt;p&gt;2026/9/15&lt;/p&gt;&#xA;&lt;p&gt;我vibe出了我自己的blog，我蠻驚訝我竟然會做Blog，我之前還信誓旦旦說不會，我錯了XD&lt;/p&gt;&#xA;&lt;p&gt;反正以後我會在上面多發自己的事情，有興趣的朋友就常上來看吧！&lt;/p&gt;&#xA;&lt;p&gt;先來稍微簡單介紹一下自己&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title></title>
+				<link>http://127.0.0.1:1313/blog/%E6%AD%A1%E8%BF%8E/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://127.0.0.1:1313/blog/%E6%AD%A1%E8%BF%8E/</guid>
+				<description>&lt;p&gt;這是你的新儲存庫 &lt;em&gt;vault&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;對筆記輸入一些內容、[[建立鏈接]]或試試匯入 &lt;a href=&#34;https://help.obsidian.md/Plugins/Importer&#34;&gt;匯入外掛&lt;/a&gt;!&lt;/p&gt;&#xA;&lt;p&gt;當一切就緒時，刪除此筆記並繼續使用此儲存庫。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title></title>
+				<link>http://127.0.0.1:1313/reviews/%E6%9C%AA%E5%91%BD%E5%90%8D/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://127.0.0.1:1313/reviews/%E6%9C%AA%E5%91%BD%E5%90%8D/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>關於我</title>
+				<link>http://127.0.0.1:1313/about/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://127.0.0.1:1313/about/</guid>
+				<description>&lt;p&gt;A girl who loves ACG&lt;/p&gt;&#xA;&lt;p&gt;目前是個高三生，就讀大安高工&lt;/p&gt;&#xA;&lt;p&gt;希望能上好大學:3&lt;/p&gt;&#xA;&lt;p&gt;本人成分複雜，會玩一點遊戲，看一點動漫，聽一點音樂，玩一點攝影&lt;/p&gt;&#xA;&lt;p&gt;還有參加一點童軍，有活動分享我會放在活動競賽那邊&lt;/p&gt;&#xA;&lt;p&gt;程式/專案/資安是一點都不會，近期開始慢慢接觸&lt;/p&gt;&#xA;&lt;p&gt;目前大概著重於Machine Learning，不過理論居多，希望可以增強自己程式的部分&lt;/p&gt;&#xA;&lt;p&gt;慢慢進步中&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+			</item>
 	</channel>
 </rss>

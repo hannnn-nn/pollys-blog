@@ -1,8 +1,20 @@
 {{ define "main" }}
-<article>
-{{ if eq .Section "reviews" }}<p><a href="{{ site.Home.RelPermalink }}#view=interests">← 回收藏清單</a></p>{{ end }}
-  <h1>{{ .Title }}</h1>
-  {{ if not .Date.IsZero }}<p><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></p>{{ end }}
-  {{ .Content }}
+<article class="article">
+  <header class="article-header">
+    <p class="eyebrow">POLLY / {{ if eq .Section "posts" }}JOURNAL{{ else }}NOTES{{ end }}</p>
+    <h1>{{ .Title }}</h1>
+    <div class="article-meta">
+      {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>{{ end }}
+      {{ range .Params.categories }}<span class="category">{{ . }}</span>{{ end }}
+    </div>
+  </header>
+  <div class="article-body">{{ .Content }}</div>
+  {{ if eq .Section "posts" }}
+  <nav class="article-pagination" aria-label="其他文章">
+    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}"><span>← 上一篇</span><strong>{{ .Title }}</strong></a>{{ end }}
+    {{ with .NextInSection }}<a class="next-post" href="{{ .RelPermalink }}"><span>下一篇 →</span><strong>{{ .Title }}</strong></a>{{ end }}
+  </nav>
+  {{ end }}
+  <div class="article-end"><a href="{{ site.Home.RelPermalink }}#view={{ if eq .Section "reviews" }}interests{{ else }}journal{{ end }}">← {{ if eq .Section "reviews" }}回收藏清單{{ else }}回文章列表{{ end }}</a></div>
 </article>
 {{ end }}
