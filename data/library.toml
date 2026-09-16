@@ -17,22 +17,22 @@ example = false
 
 [[items]]
 category = '動漫'
-title = '範例：動畫或漫畫名稱'
+title = '魔法帽的工作室'
 status = '正在看'
-note = '寫下進度、喜歡的角色或一句心得。'
-score = ''
-image = ''
+note = '整體很黑暗，世界觀很有趣，畫風很厲害，男主角像五條悟('
+score = '8'
+image = 'images/magic.jpg'
 url = ''
 featured = false
-example = true
+example = false
 
 [[items]]
 category = '遊戲'
-title = '範例：遊戲名稱'
+title = 'Persona 5 Royal'
 status = '正在玩'
-note = '寫下喜歡的玩法或想玩的原因。'
-score = ''
-image = ''
+note = '在裡面體驗了一把日本青春男高，真羨慕'
+score = '7'
+image = 'images/p5r.jpg'
 url = ''
 featured = false
-example = true
+example = false
