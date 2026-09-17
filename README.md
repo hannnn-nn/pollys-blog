@@ -19,3 +19,5 @@ timeline.tomi修改時間軸
 Static\image 大小
 banner 1600*400 
 興趣 500*332
+
+全部vibe coding 不知道裡面有什麼屎山代碼
