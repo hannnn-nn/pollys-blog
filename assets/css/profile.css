@@ -624,6 +624,10 @@ html[data-theme="light"] .snowflake {
   font-size: 13px;
 }
 
+.current-list > div > .badge {
+  margin-right: 8px;
+}
+
 .pick-list {
   border: 1px solid var(--line);
   border-radius: 10px;

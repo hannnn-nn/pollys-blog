@@ -24,14 +24,7 @@
       </nav>
     {{ end }}
     <div class="article-end">
-      <a
-        href="{{ site.Home.RelPermalink }}#view={{ if eq .Section "reviews" }}
-          interests
-        {{ else }}
-          journal
-        {{ end }}"
-        >← {{ if eq .Section "reviews" }}回收藏清單{{ else }}回文章列表{{ end }}</a
-      >
+      <a href="{{ site.Home.RelPermalink }}#view=journal">← 回文章列表</a>
     </div>
   </article>
 {{ end }}
