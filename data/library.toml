@@ -16,16 +16,7 @@ url = ''
 featured = true
 example = false
 
-[[items]]
-category = '音樂'
-title = ''
-status = ''
-note = ''
-score = ''
-image = ''
-url = ''
-featured = false
-example = false
+
 
 [[items]]
 category = '動漫'

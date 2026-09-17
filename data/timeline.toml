@@ -1,18 +1,68 @@
 # url 可填 Blog 文章路徑，例如 '/posts/my-first-post/'；留空就不顯示連結。
 # 複製一整段 [[entries]] 就能新增經歷；日期依 sort 新到舊排序。
 # 範例是填寫提示，不是你的實際經歷。填好後改 example = false。
-[[entries]]
-sort = '2026-09-15'
-date = '2026.09 — 至今'
-title = '範例：填入專案名稱'
-description = '寫下你做了什麼、負責的部分或成果。'
-url = ''
-example = true
 
 [[entries]]
 sort = '2026-09-01'
-date = '2026.09.01'
-title = '範例：填入活動或競賽名稱'
-description = '寫下參與身分、心得或獎項。'
+date = '2026.09.01~至今'
+title = '專題實作'
+description = '還在做，做完再說'
 url = ''
-example = true
+example = false
+
+
+[[entries]]
+sort = '2026-06-26'
+date = '2026.06.26'
+title = '自主學習-李弘毅ML2021'
+description = '理論微懂，實作全死'
+url = 'https://hackmd.io/@hannnnie/HJxEFJQzfl'
+example = false
+
+[[entries]]
+sort = '2025-09-01'
+date = '2025.09.01'
+title = '大安高工電腦研究社27th-文書'
+description = '復興電資，加入電資沒煩惱'
+url = ''
+example = false
+
+[[entries]]
+sort = '2024-09-01'
+date = '2024.09.01'
+title = '高中生'
+description = '非常好學校，非常好生活'
+url = ''
+example = false
+
+[[entries]]
+sort = '2024-07-11'
+date = '2024.07.11~16'
+title = '全國童軍大露營'
+description = '那麼遙遠沒有心得了，不過很好玩'
+url = ''
+example = false
+
+[[entries]]
+sort = '2021-09-01'
+date = '2021.09.01'
+title = '國中生'
+description = '啊不是啊我之前就在讀書你想拿我怎樣啦ㄏㄚˊ'
+url = ''
+example = false
+
+[[entries]]
+sort = '2015-09-01'
+date = '2015.09.01'
+title = '國小人生'
+description = '可憐'
+url = ''
+example = false
+
+[[entries]]
+sort = '2009-04-30'
+date = '2009.04.30'
+title = '你好，我來到這個破世界上'
+description = '開啟地球online'
+url = ''
+example = false
