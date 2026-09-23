@@ -570,7 +570,7 @@ html[data-theme="light"] .snowflake {
 
 .life-log li {
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-columns: 112px 1fr;
   gap: 18px;
 }
 
@@ -581,7 +581,6 @@ html[data-theme="light"] .snowflake {
 }
 
 .log-body {
-  min-width: 0;
   position: relative;
   border-left: 1px solid var(--line);
   padding: 0 0 28px 20px;
@@ -612,12 +611,6 @@ html[data-theme="light"] .snowflake {
   font-size: 13px;
   color: var(--muted);
   margin: 5px 0 10px;
-}
-
-.log-body p {
-  white-space: normal;
-  overflow-wrap: anywhere;
-  height: auto;
 }
 
 .log-body a,

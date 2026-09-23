@@ -1,4 +1,15 @@
 {{ $items := hugo.Data.library.items }}
+{{ $categories := slice "音樂" "動漫" "遊戲" }}
+{{ range $items }}
+  {{ $categories = $categories | append .category }}
+{{ end }}
+{{ $categories = $categories | uniq }}
+{{ $orderedItems := slice }}
+{{ range $categories }}
+  {{ range where $items "category" . }}
+    {{ $orderedItems = $orderedItems | append . }}
+  {{ end }}
+{{ end }}
 <h2 id="interests-title">興趣 / LIBRARY</h2>
 
 <p class="collection-intro">一些有趣音樂、遊戲、動漫(漫畫)</p>
@@ -52,10 +63,6 @@
 <div data-collection>
   <div class="filters" role="group" aria-label="收藏分類">
     <button type="button" data-pick="全部" aria-pressed="true">全部</button>
-    {{ $categories := slice "音樂" "動漫" "遊戲" "電影" }}
-    {{ range $items }}
-      {{ $categories = $categories | append .category }}
-    {{ end }}
     {{ range $categories | uniq }}
       <button type="button" data-pick="{{ . }}" aria-pressed="false">
         {{ . }}
@@ -65,7 +72,7 @@
   <p class="count" data-result-count aria-live="polite">
   </p>
   <div class="library-grid">
-    {{ range $items }}
+    {{ range $orderedItems }}
       <article class="library-item" data-entry data-kind="{{ .category }}">
         {{ if .url }}
           <a class="review-card-link" href="{{ .url | strings.TrimPrefix "/" | relURL }}">
