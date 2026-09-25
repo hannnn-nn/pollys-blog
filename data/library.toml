@@ -50,3 +50,14 @@ image = 'images/nier.jpg'
 url = ''
 featured = false
 example = false
+
+[[items]]
+category = '動漫'
+title = '鏈鋸人'
+status = '蕾潔我老婆'
+note = '我的第一部入坑作，我還買了漫畫，只能說蕾潔真婆，但其實漫畫的蕾潔篇蠻短的'
+score = '7.5'
+image = 'images/Chainsaw_Man.jpg'
+url = ''
+featured = false
+example = false
