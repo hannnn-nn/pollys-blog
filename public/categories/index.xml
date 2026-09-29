@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Categories on My New Hugo Project</title>
-		<link>http://localhost:1313/pollys-blog/categories/</link>
+		<link>https://hannnn-nn.github.io/pollys-blog/categories/</link>
 		<description>Recent content in Categories on My New Hugo Project</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Wed, 16 Sep 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/pollys-blog/categories/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://hannnn-nn.github.io/pollys-blog/categories/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>碎碎念</title>
-				<link>http://localhost:1313/pollys-blog/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</link>
+				<link>https://hannnn-nn.github.io/pollys-blog/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</link>
 				<pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/pollys-blog/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</guid>
+				<guid>https://hannnn-nn.github.io/pollys-blog/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</guid>
 				<description></description>
 			</item>
 	</channel>
